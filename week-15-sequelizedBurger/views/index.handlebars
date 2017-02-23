@@ -1,0 +1,62 @@
+<h1>Burgers</h1>
+
+<h2>Add Burger!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless this.turkey}}
+      <li>
+        {{this.name}}
+
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="turkey" value="true">
+          <button type="submit">ADD BURGER!</button>
+        </form>
+
+        {{> burgers/delete-burger}}
+      </li>
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Devour burger!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if this.turkey}}
+      <li>
+        {{this.name}}
+
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="turkey" value="false">
+          <button type="submit">DEVOUR!</button>
+        </form>
+
+        {{> burgers/delete-burger}}
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Burger</h2>
+<form class="create-update-form" action="/" method="POST">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="slee">Turkey?</label><br>
+    <input type="radio" name="turkey" value="1" checked> Add!<br>
+    <input type="radio" name="turkey" value="0"> Devour
+  </div>
+
+  <div class="form-group">
+    <label for="slee">Customer?</label><br>
+    <input type="radio" name="customer" value="1" checked> Add!<br>
+    <input type="radio" name="customer" value="0"> Devour
+  </div>
+
+  <button type="submit">Add Burger</button>
+</form>
